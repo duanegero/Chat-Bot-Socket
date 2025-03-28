@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 const server = http.createServer(app);
 
 const botName = process.env.BOT_NAME;
-import { getJoke, getRiddle } from "./Helpers/getHelpers.js";
+import { getJoke, getRiddle, getFact } from "./Helpers/getHelpers.js";
 //creating a new socket.io server with CORS config
 const io = new Server(server, {
   cors: {
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
         socket.emit("bot-reply", joke);
         socket.emit(
           "bot-reply",
-          "What to hear another? Simply say Joke or Riddle."
+          "Want to hear another? Simply say Joke or Riddle."
         );
       } catch (error) {
         socket.emit(
@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
         socket.emit("bot-reply", riddle);
         socket.emit(
           "bot-reply",
-          "What to hear another? Simply say Joke or Riddle."
+          "Want to hear another? Simply say Joke or Riddle."
         );
       } catch (error) {
         socket.emit(
@@ -66,8 +66,29 @@ io.on("connection", (socket) => {
           "Sorry, there was an error fetching the riddle."
         );
       }
+    } else if (trimmedMessage.toLowerCase() === "fact") {
+      try {
+        const fact = await getFact();
+        socket.emit("bot-reply", fact);
+        socket.emit("bot-reply", "For more facts, say fact.");
+      } catch (error) {
+        socket.emit(
+          "bot-reply",
+          "Sorry, there was an error fetching the fact."
+        );
+      }
     } else {
-      socket.emit("bot-reply", "Please enter 'joke' or 'riddle'.");
+      try {
+        const fact = await getFact();
+        socket.emit(
+          "bot-reply",
+          "Hmmm, don't like jokes or riddles? Here's a fact."
+        );
+        socket.emit("bot-reply", fact);
+        socket.emit("bot-reply", "To hear another say fact.");
+      } catch (error) {
+        socket.emit("bot-reply", "Sorry I'm having trouble right now.");
+      }
     }
   });
 

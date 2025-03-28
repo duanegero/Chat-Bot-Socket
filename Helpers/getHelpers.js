@@ -39,3 +39,20 @@ export const getRiddle = async () => {
     console.error("Error fetching riddle:", error.message);
   }
 };
+
+export const getFact = async () => {
+  const apiUrl = process.env.API_URL;
+
+  try {
+    const response = await axios.get(`${apiUrl}/facts/random`);
+
+    if (response.data) {
+      return response.data.fact;
+    } else {
+      console.log("No fact found.");
+      return "No fact found.";
+    }
+  } catch (error) {
+    console.error("Error fetching fact:", error.message);
+  }
+};
