@@ -1,3 +1,4 @@
+//importing axios
 import axios from "axios";
 
 //async funcition to get joke
@@ -41,11 +42,14 @@ export const getRiddle = async () => {
 };
 
 export const getFact = async () => {
+  //variable to handle api url
   const apiUrl = process.env.API_URL;
 
   try {
+    //variable to handle axios request
     const response = await axios.get(`${apiUrl}/facts/random`);
 
+    //if response has data return the fact
     if (response.data) {
       return response.data.fact;
     } else {
@@ -53,6 +57,7 @@ export const getFact = async () => {
       return "No fact found.";
     }
   } catch (error) {
+    //catch if any errors
     console.error("Error fetching fact:", error.message);
   }
 };

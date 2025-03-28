@@ -42,10 +42,12 @@ io.on("connection", (socket) => {
       try {
         const joke = await getJoke();
         socket.emit("bot-reply", joke);
-        socket.emit(
-          "bot-reply",
-          "Want to hear another? Simply say Joke or Riddle."
-        );
+        setTimeout(() => {
+          socket.emit(
+            "bot-reply",
+            "Want to hear another? Simply say Joke or Riddle."
+          );
+        }, 5000);
       } catch (error) {
         socket.emit(
           "bot-reply",
@@ -56,10 +58,12 @@ io.on("connection", (socket) => {
       try {
         const riddle = await getRiddle();
         socket.emit("bot-reply", riddle);
-        socket.emit(
-          "bot-reply",
-          "Want to hear another? Simply say Joke or Riddle."
-        );
+        setTimeout(() => {
+          socket.emit(
+            "bot-reply",
+            "Want to hear another? Simply say Joke or Riddle."
+          );
+        }, 5000);
       } catch (error) {
         socket.emit(
           "bot-reply",
@@ -70,7 +74,9 @@ io.on("connection", (socket) => {
       try {
         const fact = await getFact();
         socket.emit("bot-reply", fact);
-        socket.emit("bot-reply", "For more facts, say fact.");
+        setTimeout(() => {
+          socket.emit("bot-reply", "For more facts, say fact.");
+        }, 5000);
       } catch (error) {
         socket.emit(
           "bot-reply",
@@ -80,12 +86,18 @@ io.on("connection", (socket) => {
     } else {
       try {
         const fact = await getFact();
-        socket.emit(
-          "bot-reply",
-          "Hmmm, don't like jokes or riddles? Here's a fact."
-        );
-        socket.emit("bot-reply", fact);
-        socket.emit("bot-reply", "To hear another say fact.");
+        setTimeout(() => {
+          socket.emit(
+            "bot-reply",
+            "Hmmm, don't like jokes or riddles? Here's a fact."
+          );
+        }, 3000);
+        setTimeout(() => {
+          socket.emit("bot-reply", fact);
+        }, 5000);
+        setTimeout(() => {
+          socket.emit("bot-reply", "To hear another say fact.");
+        }, 7000);
       } catch (error) {
         socket.emit("bot-reply", "Sorry I'm having trouble right now.");
       }
