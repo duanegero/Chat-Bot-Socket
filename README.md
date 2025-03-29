@@ -1,6 +1,6 @@
 # Chat-Bot Socket.IO Server
 
-This is a real-time chat server built using <strong>Socket.IO</strong>, allowing users to connect and interact with Bot through messages. The server facilitates a <strong>two-way communication</strong> enabling users to join send messages, and receive messages in real-time.
+This is a real-time chat server built using <strong>Socket.IO</strong>, allowing users to connect and interact with Bot through messages. The server facilitates a <strong>two-way communication</strong> enabling users to join, send messages, and receive messages in real-time.
 
 - [Installation](#installation)
 - [Usage](#usage)
